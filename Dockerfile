@@ -14,7 +14,7 @@ WORKDIR /code
 COPY requirements.txt .
 
 # update pip
-RUN sudo apt install python3-pip
+RUN apt install python3-pip
 
 # install the requirements with pip
 RUN pip3 install -r requirements.txt
