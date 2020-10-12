@@ -13,11 +13,10 @@ WORKDIR /code
 # set the package requirements for the script
 COPY requirements.txt .
 
-# update pip
-RUN apt install python3-pip
 
 # install the requirements with pip
-RUN pip3 install -r requirements.txt
+#RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 # put the local src directory to the cwd
 COPY crawler_test.py .
