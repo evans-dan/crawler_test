@@ -71,6 +71,9 @@ Design Decisions:
 results. Users should be aware that "incomplete" is not synonymous with 
 "unavailable".
 
+- invalid URLs are returned as part of the results, but with an empty 
+list of images.
+
 Future development:
 
 - authentication. Strict separation of users and requested jobs. 
@@ -83,8 +86,10 @@ results to check the discovered data structure versus the "gold
 standard".
 
 - ensure that the number of threads is sensible. No reason to allow for 
-more threads than URLs. This number is a design decision that should 
-take the architecture and use cases of the server into account.
+more threads than URLs under this design. This number is a design 
+decision that should take the architecture and use cases of the server 
+into account. Allowing n URLs with m threads with n < m would 
+require a refactoring so that (m-n) threads did not stand idle.
 
 - longer term storage of results. No reason that results for a URL 
 cannot be cached to disk. Consider a simple database or flat file with a 
