@@ -6,8 +6,6 @@ RUN apt-get update \
   && ln -s /usr/bin/python3 python \
   && pip3 install --upgrade pip
 
-ENTRYPOINT ["python3"]
-
 #some info
 LABEL maintainer="evans.dan@gmail.com"
 LABEL version="0.1"
@@ -32,4 +30,5 @@ COPY crawler_test.py .
 EXPOSE 5000
 
 # run the container
-CMD [ "/usr/bin/python3", "./crawler_test.py" ]
+ENTRYPOINT ["python3", "./crawler_test.py"]
+#CMD [ "/usr/bin/python3", "./crawler_test.py" ]
