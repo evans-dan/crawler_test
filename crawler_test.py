@@ -186,4 +186,5 @@ def result(job_id):
 
 if __name__ == '__main__':
     #app.run(host="0.0.0.0", port=int("5000"))
-    app.run()
+    #app.run()
+    app.run(port=int("5000"))
