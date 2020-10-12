@@ -25,10 +25,9 @@ comma-delimited string of URLs. This is required.
 worker threads upwards from the default value of 1. This is optional.
 
 Example with cURL:
-curl -X POST http://localhost:5000 -F "num_threads=2" -F 
-"data=https://www.golang.org,www.python.org"
+curl -X POST http://localhost:5000 -F "num_threads=2" -F "data=https://www.golang.org,www.python.org"
 
-Response: a JSON object summarizing the thread and including a job_id
+Response: a JSON object summarizing the request and including a job_id
 
 To request status:
 curl -X GET http://localhost:5000/status/<job_id>
@@ -42,18 +41,28 @@ curl -X GET http://localhost:5000/result/<job_id>
 Response: a JSON object summarising the available results of the request 
 -OR- an error message.
 
-Decisions/understanding of the problem:
+A Definition:
 
 - crawling a URL "to the second level" means crawling the URL _and_ each 
-page that is on that page. I.e., two levels, not two levels "down" from 
-the start.
+page that is on that page. I.e., a request to foo.com will crawl 
+foo.com and any page with a link on foo.com, and no deeper.
 
-Known Issues:
+Known Limitations:
 
 - not all images will be found. This design will only catch the above 
 image files that are hard-coded into the HTML. It will not catch 
 any image that is displayed encoded into the HTML, nor will it dig 
 through images displayed through CSS styling.
+
+- not all "links" will be found. This design will only catch <a> tags 
+with an href included in them. Anything effected through JS to act like 
+a link without an href will not be found.
+
+Design Decisions:
+
+- requesting the results of an incomplete request will render incomplete 
+results. Users should be aware that "incomplete" is not synonymous with 
+"unavailable".
 
 Future development:
 
@@ -82,9 +91,9 @@ a switch could be given to ignore links that leave the base request URL
 (e.g. requesting a company site may yield a link to a twitter page; 
 returning results there could be controlled).
 
-- better logging. Right now logging of status messages just happens in 
-the window where the script is running; actual logging of the results 
-(and control of logging level) could be increased.
+- better logging. Messages just appear in the terminal where the 
+script is running; actual logging of the results (and control of logging 
+level) could be greatly improved.
 
 - output control: allowing the user to choose what the output of the 
 various requests actually is: a JSON object, plain text, a web page, 
@@ -93,3 +102,6 @@ etc.
 - error handling. Right now bad URLs are returned with zero results. 
 This behaviour could be modified based on user request (silently drop, 
 cancel the whole job, e.g.).
+
+- deeper reading of html source. Consider finding CSS definitions and 
+parsing them for image content.
