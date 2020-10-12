@@ -1,5 +1,5 @@
 #base image
-FROM python:3.8
+FROM ubuntu:20.04
 
 #some info
 LABEL maintainer="evans.dan@gmail.com"
