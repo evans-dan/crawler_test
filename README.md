@@ -5,8 +5,11 @@ This will act like an API for a threaded web crawler.
 Quickstart:
 
 git clone https://www.github.com/evans-dan/crawler_test.git
+
 cd crawler_test
+
 docker build -t crawler_test -f Dockerfile ./
+
 docker run -p 5000:5000 crawler_test
 
 Requirements:
