@@ -32,4 +32,4 @@ COPY crawler_test.py .
 EXPOSE 5000
 
 # run the container
-CMD [ "python3", "crawler_test.py" ]
+CMD [ "/usr/bin/python3", "crawler_test.py" ]
