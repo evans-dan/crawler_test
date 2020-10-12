@@ -19,5 +19,8 @@ RUN pip3 install -r requirements.txt
 # put the local src directory to the cwd
 COPY crawler_test.py .
 
+# set the port to use
+EXPOSE 5000
+
 # run the container
 CMD [ "python3", "./crawler_test.py" ]
