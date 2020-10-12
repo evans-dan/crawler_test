@@ -2,6 +2,13 @@
 
 This will act like an API for a threaded web crawler.
 
+Quickstart:
+
+git clone https://www.github.com/evans-dan/crawler_test.git
+cd crawler_test
+docker build -t crawler_test -f Dockerfile ./
+docker run -p 5000:5000 crawler_test
+
 Requirements:
 - request a number of threads and number of URLs to be crawled
 - for each URL requested, return a list of image files (.gif, .png and 
